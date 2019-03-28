@@ -1,1 +1,1 @@
-include ':app', ':common_wifi',":common_base",":common_ui"
+include ':app', ':common_wifi', ':common_socket',":common_base",":common_ui"
