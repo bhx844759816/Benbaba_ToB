@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common_base" />
             <option value="$PROJECT_DIR$/common_ui" />
+            <option value="$PROJECT_DIR$/common_wifi" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
