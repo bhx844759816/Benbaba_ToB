@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -10,4 +10,11 @@
         <item name="windowActionBar">false</item>
     </style>
 
+
+    <declare-styleable name="DrumView">
+        <attr name="size" format="integer" />
+        <attr name="outColor" format="color" />
+        <attr name="centerColor" format="color" />
+        <attr name="lineColor" format="color" />
+    </declare-styleable>
 </resources>

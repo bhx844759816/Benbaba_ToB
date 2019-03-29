@@ -12,7 +12,7 @@ import java.util.List;
 
 public abstract class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     List<T> mDatas = new ArrayList<>();
-    Context mContext;
+    protected Context mContext;
     ItemViewTypeManager<T> mItemViewTypeManager;
     OnItemClickListener mItemListener;
 
