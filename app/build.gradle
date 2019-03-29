@@ -28,4 +28,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common_base')
     implementation project(':common_ui')
+    implementation project(':common_wifi')
+    implementation project(':common_socket')
+
+    implementation thirdLibrarys.butterknife
+    implementation thirdLibrarys.rxPermissions
+    annotationProcessor thirdLibrarys.butterknifeCompiler
 }

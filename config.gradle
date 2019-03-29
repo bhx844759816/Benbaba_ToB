@@ -14,6 +14,8 @@ versions.multidex = "1.0.2"
 //第三方共用库版本
 versions.rxJava = "2.1.7"
 versions.rx_android = "2.0.1"
+versions.rxlifecycle = "2.2.1"
+versions.rxPermissions = "0.9.5@aar"
 versions.retrofit = "2.3.0"
 versions.glide = "3.8.0"
 versions.eventBus = "3.8.0"
@@ -22,7 +24,6 @@ versions.permission = "1.1.2"
 versions.arouter_compiler = "1.1.4"
 versions.arouter_api = "1.3.1"
 versions.logger = "2.2.0"
-versions.rxlifecycle = "2.2.1"
 versions.butterknife = "8.6.0"
 versions.banner = "1.4.10"
 versions.banner2 = "2.0.2"
@@ -47,6 +48,7 @@ ext.thirdLibrarys = [
         retrofitAdapter    : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
         rxJava             : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
         rxAndroid          : "io.reactivex.rxjava2:rxandroid:$versions.rx_android",
+        rxPermissions          : "com.tbruyelle.rxpermissions2:rxpermissions:$versions.rxPermissions",
         logger             : "com.orhanobut:logger:$versions.logger",
         rxlifecycle        : "com.trello.rxlifecycle2:rxlifecycle-components:$versions.rxlifecycle",
         butterknife        : "com.jakewharton:butterknife:$versions.butterknife",

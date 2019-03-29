@@ -14,17 +14,22 @@ import java.util.concurrent.TimeUnit;
 public class ThreadPoolManager {
     private static final int CPU_SIZE = Runtime.getRuntime().availableProcessors();
     private static final int CORE_POOL_SIZE = CPU_SIZE * 2 + 1;//核心线程数
-    private static final int MAX_THREAD_SIZE = 100;
+    private static final int MAX_THREAD_SIZE = 100; //线程池最大线程数量
     private static final long KEEP_ALIVE_TIME = 1;//存活时间
     private TimeUnit unit = TimeUnit.HOURS;
     private ThreadPoolExecutor sPoolExecutor;
     private static ThreadPoolManager INSTANCE;
-    public static ThreadPoolManager getInstance(){
-        if(INSTANCE == null){
 
+    public static ThreadPoolManager getInstance() {
+        if (INSTANCE == null) {
+            synchronized (ThreadPoolManager.class) {
+                if (INSTANCE == null)
+                    INSTANCE = new ThreadPoolManager();
+            }
         }
         return INSTANCE;
     }
+
     private ThreadPoolManager() {
         sPoolExecutor = new ThreadPoolExecutor(
                 CORE_POOL_SIZE,//核心线程数
@@ -56,6 +61,8 @@ public class ThreadPoolManager {
     }
 
     /**
+     * 执行callable并返回执行结果
+     *
      * @param callable
      * @return
      */
@@ -63,5 +70,10 @@ public class ThreadPoolManager {
 
         return sPoolExecutor.submit(callable);
     }
+
+    public <T> Future<T> submit(Runnable runnable, T t) {
+        return sPoolExecutor.submit(runnable, t);
+    }
+
 
 }
