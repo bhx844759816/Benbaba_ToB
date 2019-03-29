@@ -1,9 +1,9 @@
 def versions = [:]
-versions.android_gradle_plugin = "3.3.0"
+versions.android_gradle_plugin = '3.3.2'
 versions.applicationId = "com.benbaba.tob"
 versions.versionCode = 1
 versions.versionName = "1.0.0"
-versions.minSdk = 19
+versions.minSdk = 16
 versions.targetSdk = 28
 versions.compileSdk = 28
 versions.buildTools = "28.0.0"

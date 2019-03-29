@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 
 android {
     def version = rootProject.ext.version
-    compileSdkVersion version.compileSdk
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion version.minSdk
@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     api supportLibrarys.supportAppCompat
     api supportLibrarys.supportAnnotations
     api supportLibrarys.supportRecyclerView
@@ -36,7 +36,6 @@ dependencies {
     api supportLibrarys.supportFragment
     api supportLibrarys.constraintLayout
     api supportLibrarys.supportDesign
-
     api thirdLibrarys.retrofitRunntime
     api thirdLibrarys.retrofitConvert
     api thirdLibrarys.retrofitAdapter
@@ -45,6 +44,4 @@ dependencies {
     api thirdLibrarys.logger
     api thirdLibrarys.rxlifecycle
     api thirdLibrarys.glide
-
-
 }
