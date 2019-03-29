@@ -16,16 +16,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".service.SocketService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
-            android:name=".ui.SearchDeviceActivity"
-            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:name=".ui.DrumsActivity"
             android:screenOrientation="landscape">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.SearchDeviceActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:screenOrientation="landscape">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.VIEW" />-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
     </application>
 
