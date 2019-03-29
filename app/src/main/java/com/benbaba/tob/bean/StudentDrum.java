@@ -17,6 +17,9 @@ public class StudentDrum {
     //音量
     private int volume;
 
+    private String tone;
+    private String mode;
+
     public String getName() {
         return name;
     }
@@ -63,5 +66,21 @@ public class StudentDrum {
 
     public void setVolume(int volume) {
         this.volume = volume;
+    }
+
+    public String getTone() {
+        return tone;
+    }
+
+    public void setTone(String tone) {
+        this.tone = tone;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 }
