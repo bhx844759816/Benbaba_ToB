@@ -53,7 +53,7 @@ public class DrumInfoFragment extends DialogFragment {
     }
 
     private void initData() {
-        tvTone.setText("音色:"+studentDrum.getTone());
+        tvTone.setText(String.format("音色:%s", studentDrum.getTone()));
     }
 
     public void setDrumInfo(StudentDrum studentDrum) {
