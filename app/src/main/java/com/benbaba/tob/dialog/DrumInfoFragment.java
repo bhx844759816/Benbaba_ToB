@@ -54,6 +54,7 @@ public class DrumInfoFragment extends DialogFragment {
 
     private void initData() {
         tvTone.setText(String.format("音色:%s", studentDrum.getTone()));
+        tvElectricity.setText(String.format("电量:%d", studentDrum.getElectricity()));
     }
 
     public void setDrumInfo(StudentDrum studentDrum) {
