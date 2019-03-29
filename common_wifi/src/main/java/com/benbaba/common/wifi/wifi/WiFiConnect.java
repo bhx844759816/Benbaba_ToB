@@ -68,7 +68,7 @@ public class WiFiConnect {
     }
 
     public static boolean isAdHoc(ScanResult scanResule) {
-        return scanResule.capabilities.indexOf("IBSS") != -1;
+        return scanResule.capabilities.contains("IBSS");
     }
 
     public static String readableSecurity(ScanResult scanResult) {

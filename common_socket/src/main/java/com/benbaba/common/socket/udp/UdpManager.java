@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 
+import com.benbaba.common.socket.ThreadPoolManager;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -13,6 +15,9 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class UdpManager {
     private static UdpManager mInstance;
@@ -32,6 +37,92 @@ public class UdpManager {
         }
         return mInstance;
     }
+
+    /**
+     * 发送udp消息并接收消息
+     *
+     * @param sendMsg     发送得消息
+     * @param sendIp      发送到服务端得IP地址
+     * @param sendPort    发送到服务端得端口号
+     * @param receivePort 本地接收端得端口号
+     * @return
+     */
+    public Pair<String, String> sendMsg(final byte[] sendData, final String sendIp, final int sendPort, final int receivePort) {
+        Future<Pair<String, String>> resultFuture = ThreadPoolManager.getInstance().submit(new Callable<Pair<String, String>>() {
+            @Override
+            public Pair<String, String> call() throws Exception {
+                DatagramSocket socket = null;
+                try {
+                    socket = new DatagramSocket(null);
+                    socket.setReuseAddress(true); // 允许多个DatagramSocket 绑定到同一个端口号
+                    socket.setBroadcast(true);
+                    socket.setSoTimeout(1000); // 1s得接收延迟
+                    socket.bind(new InetSocketAddress(receivePort));
+                    byte[] receiveData = new byte[1024];
+                    DatagramPacket receivePacket = new DatagramPacket(receiveData, 0, receiveData.length);
+                    DatagramPacket sendPacket = new DatagramPacket(sendData, 0, sendData.length);
+                    sendPacket.setAddress(InetAddress.getByName(sendIp));
+                    sendPacket.setPort(sendPort);
+                    socket.send(sendPacket);
+                    socket.receive(receivePacket);
+                    String receiveMsg = new String(receiveData, 0, receivePacket.getLength());
+                    String receiveAddress = receivePacket.getAddress().toString().substring(1);
+                    if (!TextUtils.isEmpty(receiveMsg)) {
+                        return new Pair<>(receiveAddress, receiveMsg);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (socket != null) {
+                        socket.close();
+                    }
+                }
+                return null;
+            }
+        });
+        try {
+            return resultFuture.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 在当前局域网发送广播
+     */
+    public void sendBroadcast(final byte[] sendData, final  int sendPort,final int receivePort) {
+        ThreadPoolManager.getInstance().execute(new Runnable() {
+            @Override
+            public void run() {
+                DatagramSocket socket = null;
+                try {
+                    socket = new DatagramSocket(null);
+                    socket.setReuseAddress(true); // 允许多个DatagramSocket 绑定到同一个端口号
+                    socket.setBroadcast(true);
+                    socket.setSoTimeout(1000);
+                    socket.bind(new InetSocketAddress(receivePort));
+                    DatagramPacket sendPacket = new DatagramPacket(sendData, 0, sendData.length);
+                    sendPacket.setAddress(InetAddress.getByName("255.255.255.255"));
+                    sendPacket.setPort(sendPort);
+                    socket.send(sendPacket);
+                } catch (SocketException e) {
+                    e.printStackTrace();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }finally {
+                    if(socket != null){
+                        socket.close();
+                    }
+                }
+            }
+        });
+    }
+
 
     /**
      * 发送消息并接收消息
@@ -79,23 +170,6 @@ public class UdpManager {
         return null;
     }
 
-    /**
-     * 发送消息不关心是否接收到消息
-     *
-     * @param sendMsg
-     * @param serverIp
-     * @param serverPort
-     */
-    public void sendMsgNoReceive(String sendMsg, String serverIp, int serverPort) {
-
-    }
-
-    /**
-     * 开启接收端消息线程
-     */
-    public void startReceiveMsg() {
-
-    }
 
 }
 
