@@ -48,14 +48,13 @@ public class DrumInfoFragment extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.fragment_drum_info, container, false);
         unbinder = ButterKnife.bind(this, view);
+        initData();
         return view;
     }
 
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
+    private void initData() {
+
+    }
 
     public void setDrumInfo(StudentDrum studentDrum) {
         this.studentDrum = studentDrum;
